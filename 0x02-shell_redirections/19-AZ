@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "Enter a string:" | tr 'A' 'Z' | tr 'c' 'e'
