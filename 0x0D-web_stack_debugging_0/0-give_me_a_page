@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Start Apache in the background
+/usr/sbin/apache2ctl -D FOREGROUND &
+
+# Navigate to the Apache document root
+cd /var/www/html
+
+# Create an HTML file with the desired content
+echo "Hello Holberton" > index.html
+
+# Keep the script running to keep the container running
+tail -f /dev/null
