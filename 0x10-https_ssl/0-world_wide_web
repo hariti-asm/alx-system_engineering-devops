@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Usage: ./1-world_wide_web <domain> <subdomain>
+# Display information
+
+get_record_info() {
+	local domain=$1
+	local subdomain=$2
+	local record_type="A"
+	local destination=$(dig +short $subdomain.$domain | tail -n 1)
+
+	if [ -n "$destination" ]; then
+		echo "The subdomain $subdomain is a $record_type record and points to $destination"
+	else
+		echo "No record found for subdomain $subdomain"
+	fi
+}
+
+main() {
+	local domain=$1
+	local subdomain=$2
+
+	if [ -z "$subdomain" ]; then
+		subdomain="www lb-01 web-01 web-02"
+	fi
+	for sub in $subdomain; do
+		get_record_info $domain $sub
+	done
+}
+
+main "$@"
