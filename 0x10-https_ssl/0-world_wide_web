@@ -1,30 +1,19 @@
 #!/usr/bin/env bash
 # Usage: ./1-world_wide_web <domain> <subdomain>
-# Display information
+# Display information about subdomains.
 
-get_record_info() {
-	local domain=$1
-	local subdomain=$2
-	local record_type="A"
-	local destination=$(dig +short $subdomain.$domain | tail -n 1)
-
-	if [ -n "$destination" ]; then
-		echo "The subdomain $subdomain is a $record_type record and points to $destination"
-	else
-		echo "No record found for subdomain $subdomain"
-	fi
+domain_information () {
+    line=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
+    echo "$2 $line" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
 }
 
-main() {
-	local domain=$1
-	local subdomain=$2
-
-	if [ -z "$subdomain" ]; then
-		subdomain="www lb-01 web-01 web-02"
-	fi
-	for sub in $subdomain; do
-		get_record_info $domain $sub
-	done
-}
-
-main "$@"
+if [ "$#" == 1 ]
+then
+  domain_information "$1" "www"
+  domain_information "$1" "lb-01"
+  domain_information "$1" "web-01"
+  domain_information "$1" "web-02"
+elif [ "$#" == 2 ]
+then
+  domain_information "$1" "$2"
+fi
