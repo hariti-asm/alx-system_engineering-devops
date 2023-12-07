@@ -1,1 +1,1 @@
-stack debugging
+stack debug
