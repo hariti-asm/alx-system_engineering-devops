@@ -1,0 +1,37 @@
+What Happens When You Type https://www.google.com and Press Enter?
+DNS Request:
+
+The process begins with a DNS (Domain Name System) request. The browser checks its local cache for the IP address of www.google.com.
+If not found, it queries a DNS server to resolve the domain name into an IP address.
+TCP/IP:
+
+Once the IP address is obtained, a TCP (Transmission Control Protocol) connection is established to the server using the IP address and port number 443 for HTTPS.
+Firewall:
+
+The connection passes through any firewalls, which may be configured to allow or block specific types of traffic.
+HTTPS/SSL:
+
+For secure communication, the browser and server initiate an SSL/TLS (Secure Sockets Layer/Transport Layer Security) handshake. This involves exchanging cryptographic information to establish a secure connection.
+Load-Balancer:
+
+Many high-traffic websites use load balancers to distribute incoming requests across multiple servers to ensure optimal resource utilization and prevent overloading a single server.
+Web Server:
+
+The request reaches a web server. The server processes the request, which might involve fetching static content or forwarding dynamic requests to an application server.
+Application Server:
+
+If the request requires dynamic content, it is sent to an application server. This server processes the request, which may involve interacting with databases or other services.
+Database:
+
+If data retrieval or manipulation is needed, the application server communicates with a database server to perform the necessary operations.
+Response:
+
+The web server, application server, or database server generates a response.
+The response travels back through the same path (load balancer, SSL, TCP/IP) to the browser.
+Rendering:
+
+The browser receives the response, which includes HTML, CSS, and JavaScript.
+The browser renders the page, executing scripts and applying styles to display the content.
+User Interaction:
+The user can interact with the page, triggering additional requests for resources.
+In your detailed blog post, you can elaborate on each step, providing technical details about protocols, encryption, and the role of each component in the web stack. Additionally, you can delve deeper into specific technologies and optimizations used in modern web architectures.
